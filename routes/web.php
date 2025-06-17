@@ -15,7 +15,9 @@ Route::get('/teste', function () {
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+
+//middleware(['auth', 'verified'])
 
 Route::get('/teste/{valor}', function ($valor) {
     return "Você digitou: {$valor}";
