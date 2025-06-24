@@ -12,7 +12,10 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        return view('produtos.index');
+        $produtos = Produto::all();
+        return view('produtos.index', [
+            'produtos' => $produtos
+        ]);
     }
 
     /**
@@ -28,7 +31,17 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        Produto::create($request->all());
+        $request->validate([
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $data = $request->all();
+        if ($request->hasFile('imagem')) {
+            $imagem = $request->file('imagem');
+            $data['imagem'] = $imagem->store('produtos', 'public');
+        }
+
+        Produto::create($data);
         return redirect()->route('produtos.index');
     }
 

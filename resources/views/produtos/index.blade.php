@@ -15,7 +15,17 @@
                     </x-link-button>
 
 
-                    
+                    <div class="product-wrapper">
+                        @foreach ($produtos as $product)
+                            <div class="product-item" style="margin: 10px;">
+                                @if ($product->imagem)
+                                    <img style="display:inline-block; width: 50px;" src="{{ asset('storage/' . $product->imagem) }}" alt="">
+                                @endif
+                                <span>Nome: {{ $product->nome }}</span>
+                                <span>Preço: {{ $product->preco }}</span>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
