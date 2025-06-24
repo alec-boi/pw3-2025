@@ -4,6 +4,7 @@ use App\Http\Controllers\CalculosController;
 use App\Http\Controllers\KeepinhoController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CarrinhoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,10 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 //middleware(['auth', 'verified'])
+
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+Route::post('/carrinho/store/{produto}', [CarrinhoController::class, 'store'])->name('carrinho.store');
+Route::post('/carrinho/remove/{produto}', [CarrinhoController::class, 'remove'])->name('carrinho.remove');
 
 Route::get('/teste/{valor}', function ($valor) {
     return "Você digitou: {$valor}";
