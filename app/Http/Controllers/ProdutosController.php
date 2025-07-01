@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
+        $categorias = Categoria::with('produtos')->get();
         return view('produtos.index', [
-            'produtos' => $produtos
+            'categorias' => $categorias
         ]);
     }
 

@@ -16,22 +16,27 @@
 
 
                     <div class="product-wrapper">
-                        @foreach ($produtos as $product)
-                            <div class="product-item" style="margin: 10px;">
-                                @if ($product->imagem)
-                                    <img style="display:inline-block; width: 50px;"
-                                        src="{{ asset('storage/' . $product->imagem) }}" alt="">
-                                @endif
-                                <span>Nome: {{ $product->nome }}</span>
-                                <span>Preço: {{ $product->preco }}</span>
-                                <span>
-                                    <form action="{{ route('carrinho.store', $product) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success">|| + Carrinho</button>
-                                    </form>
-                                </span>
-                            </div>
+                        @foreach ($categorias as $categoria)
+                            <br>
+                            <h2>{{ $categoria->nome }}</h2>
+                            <br>
+                            @foreach ($categoria->produtos as $product)
+                                <div class="product-item" style="margin: 10px;">
+                                    @if ($product->imagem)
+                                        <img style="display:inline-block; width: 50px;"
+                                            src="{{ asset('storage/' . $product->imagem) }}" alt="">
+                                    @endif
+                                    <span>Nome: {{ $product->nome }}</span>
+                                    <span>Preço: {{ $product->preco }}</span>
+                                    <span>
+                                        <form action="{{ route('carrinho.store', $product) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success">|| + Carrinho</button>
+                                        </form>
+                                    </span>
+                                </div>
+                            @endforeach
                         @endforeach
                     </div>
                 </div>
